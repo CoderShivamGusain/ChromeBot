@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChromeBot</title>
+  <link rel="stylesheet" href="sidebar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>ChromeBot</h1>
+      <button id="settings-btn" title="Settings">⚙️</button>
+    </header>
+
+    <div id="chat-container" class="chat-container">
+      <div class="message system">
+        Hello! I'm ChromeBot. How can I help you with this page?
+      </div>
+    </div>
+
+    <div class="input-container">
+      <textarea id="user-input" placeholder="Ask about this page..." rows="1"></textarea>
+      <button id="send-btn">Send</button>
+    </div>
+
+    <!-- Privacy Consent Modal -->
+    <div id="privacy-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>⚠️ Sensitive Site Detected</h3>
+        <p>You are on <strong id="sensitive-domain"></strong>.</p>
+        <p>Do you want to send the content of this page to the AI for context?</p>
+        <div class="modal-actions">
+          <button id="btn-send-context" class="primary-btn">Yes, Include Context</button>
+          <button id="btn-send-no-context" class="secondary-btn">No, Just Send Message</button>
+          <button id="btn-cancel" class="text-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="sidebar.js"></script>
+</body>
+</html>

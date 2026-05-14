@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChromeBot Settings</title>
+  <style>
+    body { font-family: 'Inter', sans-serif; max-width: 600px; margin: 40px auto; background-color: #0f172a; color: #f8fafc; }
+    h1 { background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card { background-color: #1e293b; padding: 24px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 24px; }
+    label { display: block; margin-bottom: 8px; font-weight: 500; color: #cbd5e1; }
+    input, select, textarea { width: 100%; padding: 10px; background-color: #0f172a; border: 1px solid #334155; border-radius: 6px; color: white; margin-bottom: 16px; box-sizing: border-box; }
+    button { background-color: #6366f1; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    button:hover { background-color: #4f46e5; }
+    .success { color: #22c55e; display: none; margin-left: 12px; }
+  </style>
+</head>
+<body>
+  <h1>ChromeBot Settings</h1>
+  
+  <div class="card">
+    <h2>LLM Configuration</h2>
+    <label>Provider</label>
+    <select id="provider">
+      <option value="openai">OpenAI</option>
+      <option value="anthropic">Anthropic (Claude)</option>
+      <option value="gemini">Google Gemini</option>
+    </select>
+
+    <label>Model Name</label>
+    <input type="text" id="model" placeholder="e.g. gpt-4o-mini, claude-3-5-sonnet-20240620, gemini-1.5-pro">
+
+    <label>API Key</label>
+    <input type="password" id="api-key" placeholder="sk-...">
+  </div>
+
+  <div class="card">
+    <h2>Privacy Configuration</h2>
+    <p style="color: #94a3b8; font-size: 0.9rem;">List domains where you want ChromeBot to ALWAYS ask for permission before sending page content. One domain per line.</p>
+    <label>Sensitive Sites</label>
+    <textarea id="sensitive-sites" rows="5" placeholder="mail.google.com&#10;github.com"></textarea>
+  </div>
+
+  <button id="save-btn">Save Settings</button>
+  <span id="save-msg" class="success">Saved successfully!</span>
+
+  <script src="settings.js"></script>
+</body>
+</html>
