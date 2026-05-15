@@ -4,6 +4,8 @@ const apiKeyEl = document.getElementById('api-key');
 const sensitiveSitesEl = document.getElementById('sensitive-sites');
 const saveBtn = document.getElementById('save-btn');
 const saveMsg = document.getElementById('save-msg');
+const deleteBtn = document.getElementById('delete-btn');
+const deleteMsg = document.getElementById('delete-msg');
 
 // Load existing
 chrome.storage.sync.get(['provider', 'model', 'apiKey', 'sensitiveSites'], (res) => {
@@ -26,6 +28,18 @@ saveBtn.addEventListener('click', () => {
     sensitiveSites: sites
   }, () => {
     saveMsg.style.display = 'inline';
-    setTimeout(() => saveMsg.style.display = 'none', 3000);
+    // Auto-close the settings page after 1.5 seconds
+    setTimeout(() => {
+      saveMsg.style.display = 'none';
+      window.close();
+    }, 1500);
+  });
+});
+
+deleteBtn.addEventListener('click', () => {
+  chrome.storage.sync.remove('apiKey', () => {
+    apiKeyEl.value = '';
+    deleteMsg.style.display = 'inline';
+    setTimeout(() => deleteMsg.style.display = 'none', 3000);
   });
 });

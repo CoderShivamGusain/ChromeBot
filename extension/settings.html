@@ -40,9 +40,12 @@
     <textarea id="sensitive-sites" rows="5" placeholder="mail.google.com&#10;github.com"></textarea>
   </div>
 
-  <button id="save-btn">Save Settings</button>
-  <span id="save-msg" class="success">Saved successfully!</span>
-
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <button id="save-btn">Save Settings</button>
+    <button id="delete-btn" style="background-color: #ef4444;">Delete API Key</button>
+    <span id="save-msg" class="success">Saved successfully!</span>
+    <span id="delete-msg" class="success" style="color: #ef4444; display: none; margin-left: 12px;">API Key deleted!</span>
+  </div>
   <script src="settings.js"></script>
 </body>
 </html>
