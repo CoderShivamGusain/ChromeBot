@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from fastapi.responses import StreamingResponse
-from llm_router import stream_response
+from llm_router import stream_response, clear_session_history
 
 app = FastAPI(title="ChromeBot API")
 
@@ -20,6 +20,10 @@ class ChatRequest(BaseModel):
     provider: str
     api_key: str
     model: str
+    session_id: str = "default_session"
+
+class ClearSessionRequest(BaseModel):
+    session_id: str
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
@@ -34,11 +38,20 @@ async def chat_endpoint(request: ChatRequest):
             api_key=request.api_key,
             model=request.model,
             system_context=system_context,
-            user_message=request.user_message
+            user_message=request.user_message,
+            session_id=request.session_id
         ):
             yield chunk
 
     return StreamingResponse(generate(), media_type="text/event-stream")
+
+@app.post("/clear_session")
+async def clear_session_endpoint(request: ClearSessionRequest):
+    success = clear_session_history(request.session_id)
+    if success:
+        return {"message": "Session cleared"}
+    else:
+        return {"message": "No session history found or error clearing"}
 
 if __name__ == "__main__":
     import uvicorn
